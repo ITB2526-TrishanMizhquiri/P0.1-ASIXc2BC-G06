@@ -62,7 +62,7 @@
 
 <img width="1693" height="283" alt="image" src="https://github.com/user-attachments/assets/3979552d-a7e3-4404-a366-5a903fd4d2a2" />
 
-*Se finalizo tres tareas*
+*Se finalizo algunas tareas*
 
 <img width="1671" height="222" alt="image" src="https://github.com/user-attachments/assets/9d919f70-6de4-42b9-a9db-65a264a8d625" />
 
