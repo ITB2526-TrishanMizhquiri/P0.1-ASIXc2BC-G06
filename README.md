@@ -22,8 +22,13 @@
 
 ![Texto Alternativo](/img/image4.png)
 
+- Actualización de sistema
+
+![Texto Alternativo](/img/image5.png)
+
 ## Tecnologias implicadas
 - NGINX / Apache
 - PHP-FPM
 - MySQL
+
 ### Instalacion de cada servicio
