@@ -57,3 +57,7 @@ Cambiamos los datos segun nuestras necesidades
 **Verificar instalación con systemctl**
 > sudo systemctl status nginx
 ![Texto](/img/status.png)
+
+**Verificar instalación con curl**
+> curl -I http://localhost
+![Texto](/img/curl.png)
