@@ -49,7 +49,19 @@ Cambiamos los datos segun nuestras necesidades
 
 ***Instalación de Mysl***
 > sudo dnf install -y nginx php-fpm php-mysqlnd mariadb105-server
-![Texto](/img/.png)
+![Texto](/img/install.png)
+
+***Estado de Mysl***
+> sudo systemctl status nginx php-fpm mariadb
+![Texto](/img/status2.png)
+
+***Instalación BBDD***
+> sudo mysql_secure_installation
+![Texto](/img/mysql_installation.png)
+
+***Creando BBDD***
+> sudo mysql -u root
+![Texto](/img/database.png)
 
 ***Intalación de Nginx***
 > sudo yum install -y nginx
