@@ -47,7 +47,7 @@
 Cambiamos los datos segun nuestras necesidades
 ![Texto](/img/nuevo.png)
 
-***Instalación de Mysl***
+***Instalación de Mysql***
 > sudo dnf install -y nginx php-fpm php-mysqlnd mariadb105-server
 ![Texto](/img/install.png)
 
@@ -61,6 +61,10 @@ Cambiamos los datos segun nuestras necesidades
 
 ***Creando BBDD***
 > sudo mysql -u root
+![Texto](/img/create_bbdd.png)
+
+***BBDD creada***
+> SHOW DATABASES;
 ![Texto](/img/database.png)
 
 ***Intalación de Nginx***
