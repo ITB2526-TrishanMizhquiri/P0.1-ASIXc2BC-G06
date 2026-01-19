@@ -66,3 +66,6 @@
 
 <img width="1671" height="222" alt="image" src="https://github.com/user-attachments/assets/9d919f70-6de4-42b9-a9db-65a264a8d625" />
 
+# Reunion 2: 19/01/2026
+Intalacion de mysql y php mas nginx y configuración de ella
+Problemas de conexion por ese motivo se retraso un poco el trabajo 
