@@ -48,7 +48,8 @@ Cambiamos los datos segun nuestras necesidades
 ![Texto](/img/nuevo.png)
 
 ***Instalación de Mysl***
->
+> sudo dnf install -y nginx php-fpm php-mysqlnd mariadb105-server
+![Texto](/img/.png)
 
 ***Intalación de Nginx***
 > sudo yum install -y nginx
