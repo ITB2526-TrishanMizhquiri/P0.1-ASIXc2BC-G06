@@ -127,3 +127,14 @@ Prueba
 
 usuario: Admin
 contraseña: 123456
+
+***Conexion entre php y BBDD***
+Verificar que l’extensió estigui carregada
+> echo "<?php phpinfo(); ?>" | sudo tee /usr/share/nginx/html/phpinfo.php
+> http://localhost/phpinfo.php
+
+![Texto](/img/busca.png)
+
+Provar la connexió amb un script PHP
+
+![Texto](/img/script.png)
