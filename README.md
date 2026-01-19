@@ -51,7 +51,7 @@ Cambiamos los datos segun nuestras necesidades
 > sudo dnf install -y nginx php-fpm php-mysqlnd mariadb105-server
 ![Texto](/img/install.png)
 
-***Estado de Mysl***
+***Estado de Mysql***
 > sudo systemctl status nginx php-fpm mariadb
 ![Texto](/img/status2.png)
 
