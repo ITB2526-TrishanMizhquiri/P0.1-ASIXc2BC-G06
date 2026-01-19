@@ -111,7 +111,7 @@ Crea la página de bienvenida welcome.php
 
 Crea el archivo logout.php
 
-![Texto](/img/logouth.png)
+![Texto](/img/logout.png)
 
 Verifica permisos
 > sudo chown -R nginx:nginx /usr/share/nginx/html/
