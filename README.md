@@ -27,9 +27,12 @@
 ![Texto Alternativo](/img/image5.png)
 
 ## Tecnologias implicadas
-- NGINX / Apache
-- PHP-FPM
-- MySQL
+- NGINX vs Apache
+  > Nginx consume menos recursos y maneja mejor conexiones concurrentes que Apache 
+- PHP FPM
+  > Usamos PHP-FPM porque separa PHP del webserver: si un script falla o se cuelga, nginx sigue sirviendo imágenes/CSS sin caerse. Con mod_php todo el Apache se satura.
+- MariaDB vs MySql
+  > MariaDB porque su imagen Docker Alpine es 4x más pequeña y ligera que MySQL oficial, mismo SQL pero menos RAM
 
 ### Instalacion de cada servicio
 ***Intalación de php***
