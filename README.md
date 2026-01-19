@@ -78,3 +78,51 @@ Cambiamos los datos segun nuestras necesidades
 **Verificar instalación con curl**
 > curl -I http://localhost
 ![Texto](/img/curl.png)
+
+***Configuración de nginx para login***
+Crear un nuevo archivo de sitio
+> sudo nano /etc/nginx/conf.d/site.conf
+
+![Texto](/img/site.png)
+
+Verificar que PHP-FPM escucha en 127.0.0.1:9000
+> Verificar que PHP-FPM escucha en 127.0.0.1:9000
+
+![Texto](/img/antesphp.png)
+
+![Texto](/img/nuevophp.png)
+
+Recargar Nginx
+> sudo nginx -t
+> sudo systemctl reload nginx
+
+Crear una página de login simple en PHP
+> sudo nano /usr/share/nginx/html/login.php
+
+![Texto](/img/login.png)
+
+Crea el archivo auth.php
+
+![Texto](/img/auth.png)
+
+Crea la página de bienvenida welcome.php
+
+![Texto](/img/welcome.png)
+
+Crea el archivo logout.php
+
+![Texto](/img/logouth.png)
+
+Verifica permisos
+> sudo chown -R nginx:nginx /usr/share/nginx/html/
+> sudo chmod -R 755 /usr/share/nginx/html/
+
+Prueba 
+> http://<tu-ip-publica>/login.php
+
+![Texto](/img/loginphp.png)
+
+![Texto](/img/inicio.png)
+
+usuario: Admin
+contraseña: 123456
