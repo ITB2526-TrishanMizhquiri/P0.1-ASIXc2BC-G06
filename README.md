@@ -80,6 +80,7 @@ Cambiamos los datos segun nuestras necesidades
 ![Texto](/img/curl.png)
 
 ***Configuración de nginx para login***
+
 Crear un nuevo archivo de sitio
 > sudo nano /etc/nginx/conf.d/site.conf
 
