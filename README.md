@@ -32,7 +32,7 @@
 - MySQL
 
 ### Instalacion de cada servicio
-**Intalación de php**
+***Intalación de php***
 > sudo yum install -y httpd php
 
 ![Texto](/img/image.png)
@@ -44,8 +44,16 @@
 
 ![Texto](/img/anterior.png)
 
-Instalación de Mysl
+Cambiamos los datos segun nuestras necesidades
+![Texto](/img/nuevo.png)
+
+***Instalación de Mysl***
 >
 
-Intalación de Nginx
->
+***Intalación de Nginx***
+> sudo yum install -y nginx
+![Texto](/img/nginx.png)
+
+**Verificar instalación con systemctl**
+> sudo systemctl status nginx
+![Texto](/img/status.png)
