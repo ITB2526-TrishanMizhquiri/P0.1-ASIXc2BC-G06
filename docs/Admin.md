@@ -32,5 +32,24 @@ Instalación de Mysl
 > sudo nano /usr/share/nginx/html/login.php
 
 
+## Instalación de mariadb
+> sudo dnf install -y nginx php-fpm php-mysqlnd mariadb105-server
+![Texto](/img/install.png)
+
+- Estado de mariadb
+> sudo systemctl status nginx php-fpm mariadb
+![Texto](/img/status2.png)
+
+- Instalación BBDD
+> sudo mysql_secure_installation
+![Texto](/img/mysql_installation.png)
+
+- Creando BBDD
+> sudo mysql -u root
+![Texto](/img/create_bbdd.png)
+
+- BBDD creada
+> SHOW DATABASES;
+![Texto](/img/database.png)
 
 
