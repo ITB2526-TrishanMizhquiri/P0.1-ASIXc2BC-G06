@@ -1,7 +1,14 @@
 # Intalación de php
 > sudo yum install -y httpd php
+![Texto](/img/image.png)
 
-[Texto](P0.1-ASIXc2BC-G06/img/image.png)
+- Verificar configuración de PHP para subida de archivos
+> sudo nano /etc/php.ini
+![Texto](/img/arxiuphp.png)
+![Texto](/img/anterior.png)
+
+- Cambiamos los datos segun nuestras necesidades
+![Texto](/img/nuevo.png)
 
 ## Verificar configuración de PHP para subida de archivos
 > sudo nano /etc/php.ini
@@ -51,5 +58,6 @@ Instalación de Mysl
 - BBDD creada
 > SHOW DATABASES;
 ![Texto](/img/database.png)
+
 
 
