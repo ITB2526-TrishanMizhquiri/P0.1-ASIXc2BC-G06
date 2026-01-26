@@ -32,12 +32,6 @@ usuario: Admin
 contraseña: 123456
 
 
-## Verificar configuración de PHP para subida de archivos
-> sudo nano /etc/php.ini
-
-Instalación de Mysl
->
-
 ## Instalación de Nginx
 >sudo yum install -y nginx
 ![Texto](/img/nginx.png)
@@ -80,6 +74,7 @@ Instalación de Mysl
 - BBDD creada
 > SHOW DATABASES;
 ![Texto](/img/database.png)
+
 
 
 
