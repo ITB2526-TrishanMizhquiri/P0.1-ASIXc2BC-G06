@@ -141,3 +141,28 @@ Verificar que l’extensió estigui carregada
 Provar la connexió amb un script PHP
 
 ![Texto](/img/script.png)
+
+***Directorio Uploads y permisos***
+Buscamos los archivos upload.php y extragram.php en todos los archivos del servidor para ver si esta creada
+> sudo find / -type f \( -name "upload.php" -o -name "extagram.php" \) 2>/dev/null | head
+
+![Texto](/img/buscando_archivos_upload.php.png)
+
+Nos metemos dentro de la carpeta donde encontramos el archivo upload y ya estaba creada
+> cd /usr/share/nginx/html
+
+![Texto](/img/Upload_ya_creada.png)
+
+Le damos los permisos a uploads para poder modificar el archivo 
+> sudo chmod 775 uploads
+> ls -ld updoats
+
+![Texto](/img/permisos_uploads.png)
+
+Comprobamos que si se puede enviar archivos y mensajes a la carpeta enviando una prueba en la que sale el resultado OK
+> sudo -u nginx sh -c 'touch /usr/share/nginx/html/uploads/prueba.txt && rm /usr/share/nginx/html/uploads/prueba.txt' && echo OK
+
+![Texto](/img/comprobando_permisos.png)
+
+
+
