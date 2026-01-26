@@ -165,7 +165,6 @@ Comprobamos que si se puede enviar archivos y mensajes a la carpeta enviando una
 
 ![Texto](/img/comprobando_permisos.png)
 
-***Lista de requisitos funcionales y no funcionales***
 
 ## Requisitos funcionales (lo que la web permite hacer)
 
