@@ -50,11 +50,11 @@
 Cambiamos los datos segun nuestras necesidades
 ![Texto](/img/nuevo.png)
 
-***Instalación de Mysql***
+***Instalación de Mariadb***
 > sudo dnf install -y nginx php-fpm php-mysqlnd mariadb105-server
 ![Texto](/img/install.png)
 
-***Estado de Mysql***
+***Estado de Mariadb***
 > sudo systemctl status nginx php-fpm mariadb
 ![Texto](/img/status2.png)
 
