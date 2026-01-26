@@ -143,6 +143,7 @@ Provar la connexió amb un script PHP
 ![Texto](/img/script.png)
 
 ***Directorio Uploads y permisos***
+
 Buscamos los archivos upload.php y extragram.php en todos los archivos del servidor para ver si esta creada
 > sudo find / -type f \( -name "upload.php" -o -name "extagram.php" \) 2>/dev/null | head
 
