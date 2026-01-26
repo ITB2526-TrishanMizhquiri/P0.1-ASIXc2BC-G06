@@ -165,5 +165,20 @@ Comprobamos que si se puede enviar archivos y mensajes a la carpeta enviando una
 
 ![Texto](/img/comprobando_permisos.png)
 
+***Lista de requisitos funcionales y no funcionales***
+
+Funcionables:
+
+Entrar a la página y que se vea correctamente.
+Que lo que envías se guarde y no se pierda al recargar
+Ver una lista con las publicaciones que ya se han hecho
+Que en cada publicación se vea el texto y, si hay foto, también la foto.
+
+No Funcionables:
+
+Que no se caiga fácilmente y, si algo falla, se recupere rápido
+Que con varias personas entrando a la vez siga funcionando bien
+Que sea fácil de volver a montar en otro servidor siguiendo los pasos
+Que sea fácil encontrar errores si pasa algo
 
 
