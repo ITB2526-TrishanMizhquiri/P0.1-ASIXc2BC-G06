@@ -10,6 +10,28 @@
 - Cambiamos los datos segun nuestras necesidades
 ![Texto](/img/nuevo.png)
 
+- Crear una página de login simple en PHP
+> sudo nano /usr/share/nginx/html/login.php
+![Texto](/img/login.png)
+
+- Crea el archivo auth.php
+![Texto](/img/auth.png)
+
+- Crea la página de bienvenida welcome.php
+![Texto](/img/welcome.png)
+
+- Crea el archivo logout.php
+![Texto](/img/logout.png)
+
+- Prueba
+> http://<tu-ip-publica>/login.php
+![Texto](/img/loginphp.png)
+![Texto](/img/inicio.png)
+
+usuario: Admin
+contraseña: 123456
+
+
 ## Verificar configuración de PHP para subida de archivos
 > sudo nano /etc/php.ini
 
@@ -58,6 +80,7 @@ Instalación de Mysl
 - BBDD creada
 > SHOW DATABASES;
 ![Texto](/img/database.png)
+
 
 
 
