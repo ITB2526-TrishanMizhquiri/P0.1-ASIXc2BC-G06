@@ -167,24 +167,25 @@ Comprobamos que si se puede enviar archivos y mensajes a la carpeta enviando una
 
 ***Lista de requisitos funcionales y no funcionales***
 
-Funcionables:
+## Requisitos funcionales (lo que la web permite hacer)
 
-- *Entrar a la página y que se vea correctamente*
+- Entrar a la página y que se vea correctamente.
+- Escribir un mensaje y enviarlo.
+- Subir una foto junto al mensaje (o publicar solo texto).
+- Que lo que envías se guarde y no se pierda al recargar.
+- Ver una lista con las publicaciones que ya se han hecho.
+- Que en cada publicación se vea el texto y, si hay foto, también la foto.
+- Que los botones y la web respondan bien (que no se quede bloqueado al darle a publicar).
+- Si algo sale mal, que la web lo indique de alguna manera.
 
-- *Que lo que envías se guarde y no se pierda al recargar*
+## Requisitos no funcionales (cómo debe ir la web)
 
-- *Ver una lista con las publicaciones que ya se han hecho*
-
-- *Que en cada publicación se vea el texto y, si hay foto, también la foto*
-
-No Funcionables:
-
-- *Que no se caiga fácilmente y, si algo falla, se recupere rápido*
-
-- *Que con varias personas entrando a la vez siga funcionando bien*
-
-- *Que sea fácil de volver a montar en otro servidor siguiendo los pasos*
-
-- *Que sea fácil encontrar errores si pasa algo*
+- Que no se caiga fácilmente y, si algo falla, se recupere rápido.
+- Que cargue a una velocidad razonable.
+- Que, con varias personas entrando a la vez, siga funcionando bien.
+- Que las fotos se guarden en un sitio preparado para eso y con permisos correctos 
+- Que sea fácil de volver a montar en otro servidor siguiendo los pasos.
+- Que quede claro qué se ha cambiado y cuándo.
+- Que sea fácil encontrar errores si pasa algo.
 
 
