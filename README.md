@@ -1,81 +1,141 @@
 # PROJECTE 0.1 - Despliegue y Configuración en AWS
-## ÍNDICE
-- [Despliegue en AWS](#despliegue-en-aws)
-- [Tecnologías Utilizadas](#tecnologías-utilizadas)
-- [Instalación y Configuración](#instalación-y-configuración)
-- [Estructura de la Base de Datos](#estructura-de-la-base-de-datos)
-- [Archivos del Proyecto](#archivos-del-proyecto)
-- [Permisos y Seguridad](#permisos-y-seguridad)
-- [Requisitos Funcionales](#requisitos-funcionales)
-- [Requisitos No Funcionales](#requisitos-no-funcionales)
+## Índice
+
+1. [Despliegue en AWS](#1-despliegue-en-aws)
+    - [Creación de Instancia EC2](#11-creación-de-instancia-ec2)
+        - [Conexión mediante SSH](#111-conexión-mediante-ssh)
+    - [Actualización del sistema](#12-actualización-del-sistema)
+2. [Tecnologías utilizadas](#2-tecnologías-utilizadas)
+    - [NGINX vs Apache](#21-nginx-vs-apache)
+    - [PHP-FPM vs mod_php](#22-php-fpm-vs-mod_php)
+    - [MariaDB vs MySQL](#23-mariadb-vs-mysql)
+    - [Comparativa de Tecnologías](#24-comparativa-de-tecnologías)
+3. [Instalación y Configuración](#3-instalación-y-configuración)
+    - [Instalación de PHP](#31-instalación-de-php)
+    - [Configuración de PHP](#32-configuración-de-php)
+    - [Instalación de MariaDB](#33-instalación-de-mariadb)
+    - [Configuración de MariaDB](#34-configuración-de-mariadb)
+    - [Instalación de NGINX](#35-instalación-de-nginx)
+    - [Configuración de NGINX](#36-configuración-de-nginx)
+4. [Base de datos](#4-base-de-datos)
+5. [Archivos del Proyecto](#5-archivos-del-proyecto)
+6. [Permisos y Seguridad](#6-permisos-y-seguridad)
+7. [Requisitos Funcionales](#7-requisitos-funcionales)
+8. [Requisitos No Funcionales](#8-requisitos-no-funcionales)
+
 
 
 ## 1. Despliegue en AWS
 
 ### 1.1 Creación de Instancia EC2
-- Acceder a la consola de AWS
-- Lanzar una instancia EC2
-- Seleccionar la AMI **Amazon Linux 2**
-- Tipo de instancia: **t2.micro** (nivel gratuito)
-- Configurar el **grupo de seguridad** con los puertos: 22 (SSH) / 80 (HTTP) / 443 (HTTPS)
-- Generar un **par de claves SSH**
+- Lanzamiento del laboratorio de **AWS Academy**.  
+- Abrir consola AWS y crear instancia EC2.  
+- Selección de AMI: **Amazon Linux 2**.  
+- Tipo de instancia: **t2.micro** (nivel gratuito).  
+- Configuración de **grupo de seguridad**: puertos 22 (SSH), 80 (HTTP), 443 (HTTPS).  
+- Generación de par de claves SSH.
 
-![Texto Alternativo](/img/instancia-ec2.png)
+![Instancia EC2](/img/instancia-ec2.png)
 
-#### Conexión mediante SSH
-    ssh -i "tu-clave.pem" ec2-user@tu-ip-publica
+#### 1.1.1. Conexión mediante SSH
+    ssh -i "clave.pem" ec2-user@tu-ip-publica
 
-![Texto Alternativo](/img/conexión-ssh.png)
+![Conexión SSH](/img/conexión-ssh.png)
 
-## Lanzamiento de la máquina AWS
-- Lanzamiento del Laboratorio para el alumnado de AWS Academy
+### 1.2 Actualización del sistema
+    sudo yum update -y
 
-![Texto Alternativo](/img/image.png)
-
-- Abro la consola AWS para cerrar instancia
-
-![Texto Alternativo](/img/image1.png)
-
-- Termino creando la instancia
-
-![Texto Alternativo](/img/image2.png)
-
-- Ya la ejecuto y los datos
-
-![Texto Alternativo](/img/image3.png)
+![Actualización Sistema](/img/actualización-sistema.png)
 
 
-## Conexión de la máquina AWS con ssh
+## 2. Tecnologías utilizadas
+### 2.1. NGINX vs Apache
+
+<p align="center">
+  <img src="img/nginx-apache.png" alt="NGINX vs Apache" width="500" />
+</p>
 
 
+Se eligió **NGINX** como servidor web principal en lugar de **Apache** por varias razones:
 
-- Actualización de sistema
+- **Arquitectura basada en eventos:** NGINX maneja un gran número de conexiones concurrentes de manera más eficiente, mientras que Apache utiliza un modelo basado en procesos o hilos, que consume más memoria y CPU bajo carga alta.
+- **Consumo de recursos:** NGINX es más ligero, lo que lo hace ideal para entornos cloud con recursos limitados (por ejemplo, **t2.micro** en AWS).
+- **Rendimiento en contenido estático:** NGINX entrega archivos estáticos mucho más rápido que Apache, reduciendo tiempos de carga.
+- **Estabilidad bajo carga:** Su diseño evita que el servidor se bloquee ante picos de tráfico, ofreciendo mayor confiabilidad para aplicaciones web modernas.
 
-![Texto Alternativo](/img/image5.png)
+En resumen, **NGINX ofrece mayor eficiencia, estabilidad y escalabilidad** frente a Apache, especialmente en entornos con tráfico variable o alto número de conexiones simultáneas.
 
-## Tecnologias implicadas
-- NGINX vs Apache
-  > Nginx consume menos recursos y maneja mejor conexiones concurrentes que Apache 
-- PHP FPM
-  > Usamos PHP-FPM porque separa PHP del webserver: si un script falla o se cuelga, nginx sigue sirviendo imágenes/CSS sin caerse. Con mod_php todo el Apache se satura.
-- MariaDB vs MySql
-  > MariaDB porque su imagen Docker Alpine es 4x más pequeña y ligera que MySQL oficial, mismo SQL pero menos RAM
+---
 
-### Instalacion de cada servicio
-***Intalación de php***
-> sudo yum install -y httpd php
+### 2.2. PHP-FPM vs mod_php
 
-![Texto](/img/image.png)
+<p align="center">
+  <img src="img/phpfpm-modphp.png" alt="PHP-FPM vs mod_php" width="500" />
+</p
 
-**Verificar configuración de PHP para subida de archivos**
-> sudo nano /etc/php.ini
+Se eligió **PHP-FPM (FastCGI Process Manager)** en lugar de **mod_php** por varias razones clave:
 
-![Texto](/img/arxiuphp.png)
+- **Separación de responsabilidades:** PHP-FPM ejecuta los scripts PHP de forma independiente del servidor web, mientras que mod_php ejecuta PHP dentro del mismo proceso de Apache. Esto significa que si un script falla, **NGINX sigue funcionando sin interrupciones**, garantizando mayor estabilidad.
+- **Eficiencia y rendimiento:** PHP-FPM permite manejar múltiples procesos PHP de manera optimizada y controlada, ajustando memoria, número de procesos y tiempos de ejecución. Esto resulta más eficiente que mod_php, que consume más memoria y recursos al correr PHP dentro del servidor web.
+- **Compatibilidad con NGINX:** NGINX no soporta módulos PHP como Apache, por lo que PHP-FPM es la opción natural y recomendada para esta combinación.
+- **Escalabilidad y seguridad:** Al separar la ejecución de PHP del servidor web, se facilita el aislamiento de procesos, la gestión de usuarios y la implementación de entornos escalables o contenedores, mejorando tanto la seguridad como la capacidad de escalar la aplicación.
 
-![Texto](/img/anterior.png)
+En resumen, **PHP-FPM ofrece estabilidad, rendimiento y compatibilidad con NGINX**, mientras que mod_php sería más limitado y pesado, especialmente en entornos cloud con recursos limitados.
 
-Cambiamos los datos segun nuestras necesidades
-![Texto](/img/nuevo.png)
+---
+
+### 2.3. MariaDB vs MySQL
+
+<p align="center">
+  <img src="img/mysql-mariadb.png" alt="MariaDB vs MySQL" width="500" />
+</p>
+
+Se optó por **MariaDB** como sistema gestor de bases de datos en lugar de **MySQL** por varias razones:
+
+- **Ligereza y rendimiento:** MariaDB es más ligera que MySQL, lo que se traduce en un mejor rendimiento en instancias con recursos limitados.
+- **Compatibilidad completa:** Mantiene **compatibilidad total con SQL y con las APIs de MySQL**, permitiendo migraciones sencillas y sin necesidad de cambiar el código de la aplicación.
+- **Desarrollo activo y comunidad:** Al ser un proyecto de código abierto con desarrollo activo, MariaDB recibe mejoras constantes en rendimiento, seguridad y estabilidad, mientras que algunas versiones de MySQL tienen ciclos de actualización más conservadores.
+- **Funciones avanzadas:** MariaDB ofrece características adicionales como motores de almacenamiento optimizados, mejoras en replicación y mejor soporte para entornos modernos.
+
+En resumen, **MariaDB combina compatibilidad, eficiencia y soporte activo**, siendo una alternativa moderna y confiable frente a MySQL.
+
+### 2.4. Comparativa de Tecnologías
+
+| Tecnología | Opción 1 | Opción 2 | Justificación de la elección |
+|------------|----------|----------|------------------------------|
+| Servidor web | **NGINX** | Apache | NGINX consume menos recursos, maneja mejor conexiones concurrentes, entrega contenido estático más rápido y es más estable bajo carga, ideal para entornos cloud. |
+| Procesamiento PHP | **PHP-FPM** | mod_php | PHP-FPM separa la ejecución de PHP del servidor web, permite mejor control de procesos y memoria, mejora la estabilidad y es compatible con NGINX, mientras que mod_php es más pesado y limitado. |
+| Base de datos | **MariaDB** | MySQL | MariaDB es más ligera, mantiene compatibilidad total con MySQL, tiene desarrollo activo, mejor rendimiento y funciones avanzadas, siendo ideal para entornos modernos y con recursos limitados. |
+
+## 3. Instalación y configuración
+
+### 3.1 Instalación de PHP
+    sudo yum install -y httpd php
+
+![PHP FPM](/img/php-fpm.png)
+
+Comprobación del estado de los servicios para garantizar que PHP FPM está operativo.
+
+![Comprobación Servicios](/img/systemctl-php.png)
+
+### 3.2 Configuración de PHP
+#### 3.2.1. Edición del archivo php.ini
+
+Modificación del archivo de configuración principal de PHP para optimizar la subida de archivos multimedia.
+
+    sudo nano /etc/php.ini
+
+![Archivo PHP](/img/arxiuphp.png)
+
+#### 3.2.2. Parámetros de configuración modificados
+
+| Directiva             | Valor Original | Valor Configurado | Justificación Técnica                                                                 |
+|-----------------------|----------------|-----------------|--------------------------------------------------------------------------------------|
+| upload_tmp_dir        | 2M             | 10M             | Permite la subida de imágenes de mayor resolución (hasta 10MB), necesario para contenido multimedia moderno |
+| upload_max_filesize   | 8M             | 50M             | Debe ser superior a upload_max_filesize para incluir el payload completo del formulario (archivo + metadatos) |
+| max_file_upload       | 20             | 300             | Incrementa el timeout de ejecución a 300 segundos para evitar interrupciones en subidas lentas o procesamiento de imágenes |
+
+![Nuevo Archivo PHP](/img/nuevo.png)
 
 ***Instalación de Mariadb***
 > sudo dnf install -y nginx php-fpm php-mysqlnd mariadb105-server
