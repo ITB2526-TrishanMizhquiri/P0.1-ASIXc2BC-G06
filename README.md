@@ -1,11 +1,33 @@
-# PROJECTE 0.1 - Desplegament extagram
+# PROJECTE 0.1 - Despliegue y Configuración en AWS
+## ÍNDICE
+- Despliegue en AWS
+- Tecnologías Utilizadas
+- Instalación y Configuración
+- Estructura de la Base de Datos
+- Archivos del Proyecto
+- Permisos y Seguridad
+- Requisitos Funcionales
+- Requisitos No Funcionales
+
+## 1. 1. DESPLIEGUE EN AWS
+### 1.1 Creación de Instancia EC2
+1. Acceder a la consola de AWS
+2. Lanzar instancia EC2
+3. Seleccionar AMI Amazon Linux 2
+4. Tipo de instancia: t2.micro (gratuito)
+5. Configurar grupo de seguridad con puertos:
+    - 22 (SSH)
+    - 80 (HTTP)
+    - 443 (HTTPS)
+6. Generar par de claves SSH
+7. Conectar mediante SSH:
 
 ## Lanzamiento de la máquina AWS
 - Lanzamiento del Laboratorio para el alumnado de AWS Academy
 
 ![Texto Alternativo](/img/image.png)
 
-- Abro la consola AWS para cerar instancia
+- Abro la consola AWS para cerrar instancia
 
 ![Texto Alternativo](/img/image1.png)
 
