@@ -1,26 +1,31 @@
 # PROJECTE 0.1 - Despliegue y Configuración en AWS
 ## ÍNDICE
-- Despliegue en AWS
-- Tecnologías Utilizadas
-- Instalación y Configuración
-- Estructura de la Base de Datos
-- Archivos del Proyecto
-- Permisos y Seguridad
-- Requisitos Funcionales
-- Requisitos No Funcionales
+- [Despliegue en AWS](#despliegue-en-aws)
+- [Tecnologías Utilizadas](#tecnologías-utilizadas)
+- [Instalación y Configuración](#instalación-y-configuración)
+- [Estructura de la Base de Datos](#estructura-de-la-base-de-datos)
+- [Archivos del Proyecto](#archivos-del-proyecto)
+- [Permisos y Seguridad](#permisos-y-seguridad)
+- [Requisitos Funcionales](#requisitos-funcionales)
+- [Requisitos No Funcionales](#requisitos-no-funcionales)
 
-## 1. 1. DESPLIEGUE EN AWS
+
+## 1. Despliegue en AWS
+
 ### 1.1 Creación de Instancia EC2
-1. Acceder a la consola de AWS
-2. Lanzar instancia EC2
-3. Seleccionar AMI Amazon Linux 2
-4. Tipo de instancia: t2.micro (gratuito)
-5. Configurar grupo de seguridad con puertos:
-    - 22 (SSH)
-    - 80 (HTTP)
-    - 443 (HTTPS)
-6. Generar par de claves SSH
-7. Conectar mediante SSH:
+- Acceder a la consola de AWS
+- Lanzar una instancia EC2
+- Seleccionar la AMI **Amazon Linux 2**
+- Tipo de instancia: **t2.micro** (nivel gratuito)
+- Configurar el **grupo de seguridad** con los puertos: 22 (SSH) / 80 (HTTP) / 443 (HTTPS)
+- Generar un **par de claves SSH**
+
+![Texto Alternativo](/img/instancia-ec2.png)
+
+#### Conexión mediante SSH
+    ssh -i "tu-clave.pem" ec2-user@tu-ip-publica
+
+![Texto Alternativo](/img/conexión-ssh.png)
 
 ## Lanzamiento de la máquina AWS
 - Lanzamiento del Laboratorio para el alumnado de AWS Academy
@@ -42,7 +47,7 @@
 
 ## Conexión de la máquina AWS con ssh
 
-![Texto Alternativo](/img/image4.png)
+
 
 - Actualización de sistema
 
