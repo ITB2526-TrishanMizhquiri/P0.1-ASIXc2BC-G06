@@ -137,8 +137,9 @@ Modificación del archivo de configuración principal de PHP para optimizar la s
 
 ![Nuevo Archivo PHP](/img/nuevo.png)
 
-***Instalación de Mariadb***
-> sudo dnf install -y nginx php-fpm php-mysqlnd mariadb105-server
+### 3.3 Instalación de MariaDB
+    sudo dnf install -y nginx php-fpm php-mysqlnd mariadb105-server
+
 ![Texto](/img/install.png)
 
 ***Estado de Mariadb***
