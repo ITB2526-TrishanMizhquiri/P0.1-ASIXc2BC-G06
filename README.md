@@ -136,124 +136,237 @@ Modificación del archivo de configuración principal de PHP para optimizar la s
 | max_file_upload       | 20             | 300             | Incrementa el timeout de ejecución a 300 segundos para evitar interrupciones en subidas lentas o procesamiento de imágenes |
 
 ![Nuevo Archivo PHP](/img/nuevo.png)
+### 3.3. Instalación de MariaDB
 
-### 3.3 Instalación de MariaDB
+Instalación del stack completo LEMP (Linux, NGINX, MariaDB, PHP) mediante gestor de paquetes DNF.
+
     sudo dnf install -y nginx php-fpm php-mysqlnd mariadb105-server
+![Texto](/img/install_mariadb.png)
 
-![Texto](/img/install.png)
+### 3.4. Configuración de MariaDB
 
-***Estado de Mariadb***
-> sudo systemctl status nginx php-fpm mariadb
+#### 3.4.1 Verificación del estado de los servicios
+
+Comprobación del estado de los servicios para garantizar que todos los componentes están operativos.
+
+    sudo systemctl status mariadb.service
 ![Texto](/img/status2.png)
 
-***Instalación BBDD***
-> sudo mysql_secure_installation
+#### 3.4.2 Hardening de seguridad
+
+Ejecución del script de seguridad para establecer contraseña de root y eliminar configuraciones inseguras por defecto.
+
+    sudo mysql_secure_installation
 ![Texto](/img/mysql_installation.png)
 
-***Creando BBDD***
-> sudo mysql -u root
-![Texto](/img/create_bbdd.png)
+### 3.5 Instalación de NGINX
 
-***BBDD creada***
-> SHOW DATABASES;
-![Texto](/img/database.png)
-
-***Intalación de Nginx***
-> sudo yum install -y nginx
+Instalación del servidor web NGINX mediante gestor de paquetes YUM.
+    sudo yum install -y nginx
 ![Texto](/img/nginx.png)
 
-**Verificar instalación con systemctl**
-> sudo systemctl status nginx
-![Texto](/img/status.png)
+### 3.6 Configuración de NGINX
+#### 3.6.1 Verificación de instalación con systemctl
+    sudo systemctl status nginx
 
-**Verificar instalación con curl**
-> curl -I http://localhost
-![Texto](/img/curl.png)
+![Texto](/img/status_nginx.png)
 
-***Configuración de nginx para login***
+#### 3.6.2 Verificación de instalación con curl
 
-Crear un nuevo archivo de sitio
-> sudo nano /etc/nginx/conf.d/site.conf
+    curl -I http://localhost
 
-![Texto](/img/site.png)
+![Texto](/img/curl_nginx.png)
 
-Verificar que PHP-FPM escucha en 127.0.0.1:9000
-> Verificar que PHP-FPM escucha en 127.0.0.1:9000
+#### 3.6.3 Configuración del Virtual Host
 
+Creación de archivo de configuración del sitio en /etc/nginx/conf.d/site.conf
+
+    sudo nano /etc/nginx/conf.d/site.conf
+
+![Texto](/img/site_conf.png)
+
+Contenido del archivo:
+
+    server {
+        listen 80;
+        server_name _;
+        root /usr/share/nginx/html;
+        index login.php;
+
+        location / {
+            try_files $uri $uri/ =404;
+        }
+
+        location ~ \.php$ {
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include fastcgi_params;
+        }
+    }
+
+#### 3.6.4 Verificación de PHP-FPM
+
+Verificación y ajuste del pool por defecto en /etc/php-fpm.d/www.conf:
+
+Antes de los cambios:
 ![Texto](/img/antesphp.png)
 
+Después de los cambios:
 ![Texto](/img/nuevophp.png)
 
-Recargar Nginx
-> sudo nginx -t
-> sudo systemctl reload nginx
+Asegurar estas líneas:
+    listen = 127.0.0.1:9000
+    listen.owner = nginx
+    listen.group = nginx
+    user = nginx
+    group = nginx
 
-Crear una página de login simple en PHP
-> sudo nano /usr/share/nginx/html/login.php
+#### 3.6.5 Recarga de configuración
 
-![Texto](/img/login.png)
+    sudo nginx -t
+    sudo systemctl reload nginx
 
-Crea el archivo auth.php
+## 4. Base de Datos
+### 4.1 Acceso a MariaDB
 
-![Texto](/img/auth.png)
+    sudo mysql -u root
 
-Crea la página de bienvenida welcome.php
+![Texto](/img/create_bbdd.png)
 
-![Texto](/img/welcome.png)
+### 4.2 Creación de Base de Datos y Tablas
 
-Crea el archivo logout.php
+    CREATE DATABASE extagram;
+    USE extagram;
 
-![Texto](/img/logout.png)
+    CREATE TABLE usuarios (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
 
-Verifica permisos
-> sudo chown -R nginx:nginx /usr/share/nginx/html/
-> sudo chmod -R 755 /usr/share/nginx/html/
+    CREATE TABLE posts (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        message TEXT NOT NULL,
+        image_path VARCHAR(255),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES usuarios(id) ON DELETE CASCADE
+    );
 
-Prueba 
-> http://<tu-ip-publica>/login.php
+    INSERT INTO usuarios (username, password) 
+    VALUES ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+    -- Contraseña: 123456
+
+### 4.3 Verificación
+
+    SHOW DATABASES;
+
+![Texto](/img/database.png)
+
+
+## 5. Archivos del Proyecto
+Todos los archivos se crean en /usr/share/nginx/html/
+### 5.1 Creación de extagram.php
+Creación del archivo principal de la aplicación web.
+
+    sudo nano /usr/share/nginx/html/extagram.php
+
+![Texto](/img/extagram.png)
+
+### 5.2 Creación de upload.php
+Creación del endpoint API para la subida de archivos.
+
+    sudo nano /usr/share/nginx/html/upload.php
+
+![Texto](/img/upload.png)
+
+### 5.3 Creación de style.css
+Creación de la hoja de estilos para la interfaz de usuario.
+
+    sudo nano /usr/share/nginx/html/style.css
+
+![Texto](/img/style.png)
+
+### 5.4 Creación de preview.svg
+Creación de archivo SVG de preview (opcional, para favicon o preview).
+
+    sudo nano /usr/share/nginx/html/preview.svg
+
+![Texto](/img/preview.png)
+
+### 5.5 Creación de carpeta uploads/
+Creación del directorio para almacenar las imágenes subidas por los usuarios.
+
+    sudo mkdir -p /usr/share/nginx/html/uploads
+
+### 5.6 Creación de login.php
+Creación del sistema de autenticación con gestión de sesiones.
+
+    sudo nano /usr/share/nginx/html/login.php
 
 ![Texto](/img/loginphp.png)
 
-![Texto](/img/inicio.png)
+### 5.7 Creación de logout.php
+Creación del script para cerrar sesión y destruir variables de sesión.
 
-usuario: Admin
-contraseña: 123456
+    sudo nano /usr/share/nginx/html/logout.php
 
-***Conexion entre php y BBDD***
-Verificar que l’extensió estigui carregada
-> echo "<?php phpinfo(); ?>" | sudo tee /usr/share/nginx/html/phpinfo.php
-> http://localhost/phpinfo.php
+![Texto](/img/logout.png)
 
-![Texto](/img/busca.png)
+### 5.8 Gestión de Sesiones PHP
+Configuración de permisos para el directorio de sesiones PHP:
 
-Provar la connexió amb un script PHP
+    sudo chown -R nginx:nginx /usr/share/nginx/html/
+    sudo chmod -R 755 /usr/share/nginx/html/
 
-![Texto](/img/script.png)
+### 5.9 Reinicio de Servicios
+Reinicio de los servicios PHP-FPM y NGINX para aplicar todos los cambios:
 
-***Directorio Uploads y permisos***
+    sudo systemctl restart php-fpm
+    sudo systemctl restart nginx
 
-Buscamos los archivos upload.php y extragram.php en todos los archivos del servidor para ver si esta creada
-> sudo find / -type f \( -name "upload.php" -o -name "extagram.php" \) 2>/dev/null | head
+### 5.10 Creación de Tabla de Usuarios en MariaDB
+Acceso a MariaDB y creación de la tabla de usuarios con un usuario de prueba:
+    sudo mysql -u root
 
-![Texto](/img/buscando_archivos_upload.php.png)
+    USE extagram;
 
-Nos metemos dentro de la carpeta donde encontramos el archivo upload y ya estaba creada
-> cd /usr/share/nginx/html
+    CREATE TABLE usuarios (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
 
-![Texto](/img/Upload_ya_creada.png)
+    INSERT INTO usuarios (username, password) 
+    VALUES ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+    -- Contraseña: 123456
 
-Le damos los permisos a uploads para poder modificar el archivo 
-> sudo chmod 775 uploads
-> ls -ld updoats
+### 5.11 Verificación de Subida de Archivos
+Prueba de escritura en el directorio uploads para verificar permisos:
 
-![Texto](/img/permisos_uploads.png)
-
-Comprobamos que si se puede enviar archivos y mensajes a la carpeta enviando una prueba en la que sale el resultado OK
-> sudo -u nginx sh -c 'touch /usr/share/nginx/html/uploads/prueba.txt && rm /usr/share/nginx/html/uploads/prueba.txt' && echo OK
+    sudo -u nginx sh -c 'touch /usr/share/nginx/html/uploads/test.txt && rm /usr/share/nginx/html/uploads/test.txt' && echo "✅ Permisos correctos" || echo "❌ Error en permisos"
 
 ![Texto](/img/comprobando_permisos.png)
 
+## 6. Gestión de Permisos
+Configuración de Permisos del Sistema de Archivos
 
+    # Propietario y grupo del directorio web
+    sudo chown -R nginx:nginx /usr/share/nginx/html/
+
+    # Permisos generales (lectura/ejecución para todos, escritura para propietario)
+    sudo chmod -R 755 /usr/share/nginx/html/
+
+    # Permisos especiales para el directorio de subidas (escritura para grupo)
+    sudo chmod 775 /usr/share/nginx/html/uploads
+
+Verificación:
+    ls -la /usr/share/nginx/html/
+
+![Texto](/img/Upload_ya_creada.png)
 ## Requisitos funcionales (lo que la web permite hacer)
 
 - Entrar a la página y que se vea correctamente.
