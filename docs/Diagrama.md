@@ -31,5 +31,5 @@ Para que la aplicación funcione correctamente, los servidores interactúan de l
 ---
 
 ## 3. Captura de la Topología
-![Topología de Red Extagram](./img/Diagrama.png)
+![Topologia](/img/Diagrama.png)
 
