@@ -15,6 +15,10 @@ Se ha diseñado una topología en Cisco Packet Tracer que segrega la aplicación
 | **S6** | **Static Server** | Diseño y Estética |Sirve los archivos fijos: `style.css` y el logo `preview.svg`. |
 | **S7** | **Database** | Base de Datos |Servidor MySQL que almacena los textos y rutas de las imágenes. |
 
+ ## Captura de la Topología
+
+![Topologia](/img/Diagrama.png)
+
 ---
 
 ## 2. Flujo de Funcionamiento
@@ -27,6 +31,6 @@ Para que la aplicación funcione correctamente, los servidores interactúan de l
 
 ---
 
-## 3. Captura de la Topología
-![Topologia](/img/Diagrama.png)
+
+
 
