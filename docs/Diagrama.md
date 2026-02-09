@@ -18,7 +18,7 @@ Se ha diseñado una topología en Cisco Packet Tracer que segrega la aplicación
  ## Captura de la Topología
 
 <div align="center">
-  <img src="(/img/Diagrama.png)" width="400px">
+  <img src="img/Diagrama.png" width="500px">
   <p><i>Topología de red - Proyecto Extagram</i></p>
 </div>
 
