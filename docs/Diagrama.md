@@ -4,7 +4,7 @@
 # Proyecto Extagram - Topología de Red (Sprint 2)
 
 ## 1. Diseño de la Infraestructura
-[cite_start]Se ha diseñado una topología en Cisco Packet Tracer que segrega la aplicación en 7 servidores independientes (simulando contenedores Docker) para garantizar alta disponibilidad y escalabilidad[cite: 207, 254].
+[cite_start]Se ha diseñado una topología en Cisco Packet Tracer que segrega la aplicación en 7 servidores independientes (simulando contenedores Docker) para garantizar alta disponibilidad y escalabilidad.
 
 ### Esquema de Servidores (S1 - S7)
 
