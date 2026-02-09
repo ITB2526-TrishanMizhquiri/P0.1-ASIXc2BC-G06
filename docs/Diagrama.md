@@ -15,11 +15,11 @@ Se ha diseñado una topología en Cisco Packet Tracer que segrega la aplicación
 | **S6** | **Static Server** | Diseño y Estética |Sirve los archivos fijos: `style.css` y el logo `preview.svg`. |
 | **S7** | **Database** | Base de Datos |Servidor MySQL que almacena los textos y rutas de las imágenes. |
 
- ## Captura de la Topología
+
 
 <div align="center">
-  <img src="img/Diagrama.png" width="500px">
-  <p><i>Topología de red - Proyecto Extagram</i></p>
+  <img src="/img/Diagrama.png" width="650px">
+  <p><i>Topología de red</i></p>
 </div>
 
 
