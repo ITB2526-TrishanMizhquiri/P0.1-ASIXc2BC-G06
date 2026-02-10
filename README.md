@@ -12,7 +12,7 @@
 
 ###  Actas de Sprint
 - [Acta Sprint Planning S2](docs/sprints/sprint2/sprint2_planning_acta.md)
-- [Acta Sprint Retrospective S2](docs/acta-sprint-retrospective-s2.md)
+- [Acta Sprint Retrospective S2](docs/sprints/sprint2/sprint2_review_acta.md)
 
 ---
 
