@@ -6,7 +6,7 @@
 ##  Documentación Oficial
 
 ###  Guías Técnicas
-- [01. Manual de Despliegue Nativo](/docs/01--desplegament--natiu.md)
+- [01. Manual de Despliegue Nativo](/docs/Administrador/01-desplegament-natiu.md)
 - [02. Arquitectura Docker](docs/02-arquitectura-docker.md)
 - [03. Guía de Mantenimiento del Sistema](docs/03-guia_manteniment.md)
 
