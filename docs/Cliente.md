@@ -1,112 +1,58 @@
+# Extagram - Guia de l'Usuari
+Benvingut a Extagram, la teva plataforma minimalista per compartir moments i gestionar publicacions de manera eficient i ràpida.
 
-# PROJECTE 0.1 – Extagram (Guía para el cliente)
+## Index
 
-Esta guía explica **cómo acceder** a la aplicación Extagram y **qué deberías ver** en cada página.
+## 1. Què és Extagram?
+Extagram és una aplicació web dissenyada per a la publicació instantània de contingut visual. Aquesta plataforma permet als usuaris pujar imatges acompanyades de descripcions, creant un mur de publicacions interactiu i dinàmic.
 
----
+**Funcionalitats Principals:**
+- **Pujada d'Imatges:** Selecciona les teves millors fotos i puja-les al moment.
+- **Gestió de Posts:** Afegeix títols o descripcions a cada imatge per donar context.
+- **Feed en Temps Real:** Visualitza les publicacions pròpies i d'altres usuaris de manera cronològica.
+- **Arquitectura d'Alta Disponibilitat:** Gràcies al nostre sistema de 7 servidors, l'aplicació mai s'atura.
 
-## 1) Acceso a la web
+## 2. Com utilitzar l'aplicació
 
-1. Abre el navegador (Chrome/Firefox).
-2. En la barra de direcciones escribe:
+### 2.1. Accés a la Plataforma
+Obre el teu navegador web preferit i introdueix l'adreça IP o domini proporcionat per l'administrador:
 
-> http://<IP-PÚBLICA-DE-LA-EC2>/
+    http://[IP-DEL-SERVIDOR]
 
+### 2.2. Crear una nova publicació
+  1. Ves a la secció de "Pujar Publicació".
+  2. Fes clic a "Seleccionar fitxer" i tria una imatge (format JPG, PNG o SVG).
+  3. Escriu un peu de foto o descripció al quadre de text.
+  4. Prem el botó "Publicar".
 
-### Qué vas a ver
-- Una página web de Extagram.
-- Un formulario para escribir un mensaje (post) y, si quieres, adjuntar una imagen.
+### 2.3. Visualitzar el Feed
+A la pàgina principal, podràs veure totes les fotos publicades. El sistema carrega automàticament les imatges des de servidors optimitzats per garantir que la navegació sigui fluida i ràpida.
 
----
+## 3. Requisits del Sistema
+Per gaudir de la millor experiència, recomanem utilitzar versions actualitzades de:
+- Google Chrome
+- Mozilla Firefox
+- Microsoft Edge
+- Safari
 
-## 2) Publicar un post (texto)
+    **Nota:** No cal instal·lar cap programari addicional al teu dispositiu, l'aplicació és 100% basada en web.
 
-1. En el campo de texto, escribe tu mensaje.
-2. Pulsa el botón **Publish** (o el botón de publicar).
+## 4. ❓ Preguntes Freqüents (FAQ)
+**P: Hi ha algun límit de mida per a les imatges?** 
 
-### Qué va a pasar
-- El post se guardará.
-- Al recargar o volver a entrar en la web, el post seguirá apareciendo.
+R: Per defecte, el sistema accepta imatges d'un màxim de 2MB. Si necessites pujar fitxers més grans, contacta amb el suport tècnic.
 
----
+**P: L'aplicació funciona si un servidor cau?**
 
-## 3) Publicar un post con imagen
+R: Sí. Extagram està muntat sobre una infraestructura redundant. Si un node falla, un altre agafarà el relleu automàticament sense que perdis la teva sessió.
 
-1. Escribe un mensaje.
-2. Pulsa el icono/área de subir archivo para elegir una imagen.
-3. Selecciona una imagen desde tu ordenador.
-4. Pulsa **Publish**.
+**P: Les meves fotos estan segures?**
 
-### Qué vas a ver
-- Antes de publicar, puede aparecer una **previsualización** de la imagen.
-- Tras publicar, el post aparecerá en la lista con:
-  - El texto del post.
-  - La imagen subida (si se adjuntó).
+R: Totes les imatges s'emmagatzemen en volums persistents aïllats i protegits darrere d'un proxy invers de seguretat.
 
----
+## 5. 📩 Suport i Contacte
+Si trobes algun error o tens suggeriments de millora, pots contactar amb l'equip de desenvolupament:
+- Trishan Mizhquiri – Lead Developer & DevOps
+- Joel Muñoz – Systems Architect & Documentation
 
-## 4) Ver publicaciones anteriores
-
-1. Baja por la página (scroll).
-2. Verás una lista de posts publicados.
-
-### Qué vas a ver
-- Publicaciones en formato “post”.
-- Algunas con imagen y otras solo con texto (según cómo se hayan publicado).
-
----
-
-## 5) Página de login (si está activada)
-
-Accede a: 
-> http://<IP-PÚBLICA-DE-LA-EC2>/login.php
-
-
-### Qué vas a ver
-- Un formulario de login con usuario y contraseña.
-
-### Qué debe hacer el cliente
-- Introducir el usuario y contraseña proporcionados por el equipo.
-
-> Nota: Si el login está configurado como demo, puede usarse:
-> - Usuario: Admin  
-> - Contraseña: 123456
-
----
-
-## 6) Pantalla de bienvenida (después del login)
-
-Si el login es correcto, se redirige a:
-
-> http://<IP-PÚBLICA-DE-LA-EC2>/welcome.php
-
-
-### Qué vas a ver
-- Un mensaje de bienvenida.
-- Un botón/enlace para cerrar sesión.
-
----
-
-## 7) Cerrar sesión
-
-Accede a:
-
-> http://<IP-PÚBLICA-DE-LA-EC2>/logout.php
-
-
-### Qué va a pasar
-- La sesión se cierra y vuelve al login o a la página principal.
-
----
-
-## 8) Qué hacer si algo falla
-
-- Si al publicar no aparece el post, prueba a recargar (F5).
-- Si no sube la imagen, prueba con otra (JPG/PNG) o una más pequeña.
-- Si sale un error, haz una captura de pantalla y envíala al equipo indicando:
-  - La URL donde estabas.
-  - Qué estabas intentando hacer (post con foto, login, etc.).
-
----
-
-
+© 2026 Extagram Project - Sprint 3 Final Release.
