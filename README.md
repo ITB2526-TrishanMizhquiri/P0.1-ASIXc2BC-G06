@@ -1,24 +1,24 @@
-# 📸 EXTAGRAM: Sprint 1 & 2  
+#  EXTAGRAM: Sprint 1 & 2  
 *De arquitectura monolítica a microservicios dockerizados*
 
 ---
 
-## 📚 Documentación Oficial
+##  Documentación Oficial
 
-### 📖 Guías Técnicas
+###  Guías Técnicas
 - [01. Manual de Despliegue Nativo (Sprint 1)](docs/01-manual-despliegue-sprint1.md)
 - [02. Arquitectura Docker](docs/02-arquitectura-docker.md)
 - [03. Guía de Mantenimiento del Sistema](docs/03-guia_manteniment.md)
 
-### 📝 Actas de Sprint
+###  Actas de Sprint
 - [Acta Sprint Planning S2](docs/acta-sprint-planning-s2.md)
 - [Acta Sprint Retrospective S2](docs/acta-sprint-retrospective-s2.md)
 
 ---
 
-## 💻 Código Fuente
+##  Código Fuente
 
-### 🏗️ Microservicios
+###  Microservicios
 | Servicio | Descripción | Archivos Clave |
 |----------|-------------|----------------|
 | **[S1 - Proxy/LB](s1-nginx/)** | Entrada única (puerto 90) + Balanceo | [`Dockerfile`](s1-nginx/Dockerfile) • [`nginx.conf`](s1-nginx/nginx.conf) |
@@ -29,23 +29,23 @@
 | **[S6 - Static](s6-static/)** | Servicio de recursos estáticos | [`style.css`](s6-static/style.css) • [`preview.svg`](s6-static/preview.svg) |
 | **[S7 - Database](s7-mysql/)** | MySQL persistente | [`init.sql`](s7-mysql/init.sql) |
 
-### ⚙️ Orquestación
+###  Orquestación
 - [`docker-compose.yml`](docker-compose.yml) - Definición completa de servicios y redes
 - [`fix-s1-nginx.sh`](fix-s1-nginx.sh) - Script de corrección automática
 - [`verificar-archivos.sh`](verificar-archivos.sh) - Script de verificación de estructura
 
 ---
 
-## 🚀 Inicio Rápido
+##  Inicio Rápido
 ```bash
 cd ~/extagram
 ./verificar-archivos.sh  # Configura y levanta todo automáticamente
 ```
-➡️ **Acceso web:** [`http://<IP-PÚBLICA>:90/`](http://3.238.204.15:90/)
+ **Acceso web:** [`http://<IP-PÚBLICA>:90/`](http://3.238.204.15:90/)
 
 ---
 
-## 🔐 Credenciales
+##  Credenciales
 | Servicio | Usuario | Contraseña |
 |----------|---------|------------|
 | **Web (login.php)** | `admin` | `password` |
@@ -53,12 +53,12 @@ cd ~/extagram
 
 ---
 
-## 📊 Diagramas de Arquitectura
+##  Diagramas de Arquitectura
 - [Diagrama de Redes Docker](img/diagrama-redes.png)
 - [Flujo de Peticiones](img/flujo-peticiones.png)
 - [Topología de Microservicios](img/topologia-microservicios.png)
 
 ---
 
-> ✨ *"La simplicidad es la máxima sofisticación"* — Leonardo da Vinci  
+>  *"La simplicidad es la máxima sofisticación"* — Leonardo da Vinci  
 > Este proyecto demuestra la evolución de una aplicación monolítica a una arquitectura de microservicios escalable y resiliente.
