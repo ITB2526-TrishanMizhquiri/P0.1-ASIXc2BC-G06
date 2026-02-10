@@ -7,13 +7,13 @@ Se ha diseñado una topología en Cisco Packet Tracer que segrega la aplicación
 
 | ID | Servicio | Dirección IP | Función Técnica |
 | :--- | :--- | :--- | :--- |
-| **S1** | **Load Balancer** | `192.168.1.1` | Proxy inverso (Nginx).Recibe peticiones y balancea hacia S2/S3. |
-| **S2** | **Extagram PHP A** | `192.168.1.10` |Nodo A: Ejecuta la parte dinámica `extagram.php`. |
-| **S3** | **Extagram PHP B** | `192.168.1.11` |Nodo B: Ejecuta la parte dinámica `extagram.php`. |
-| **S4** | **Upload PHP** | `192.168.1.20` |Gestiona subidas mediante `upload.php` hacia el directorio de imágenes. |
-| **S5** | **Images Server** | `192.168.1.30` |Servidor Nginx dedicado a servir el contenido de `/uploads`. |
-| **S6** | **Static Server** | `192.168.1.40` |Servidor Nginx para archivos fijos: `style.css` y `preview.svg`. |
-| **S7** | **Database** | `192.168.1.50` | MySQL. Almacena posts y sirve de respaldo para las imágenes. |
+| **S1** | **Load Balancer** | `172.26.0.6 - 172.27.0.4` | Proxy inverso (Nginx).Recibe peticiones y balancea hacia S2/S3. |
+| **S2** | **Extagram PHP A** | `172.26.0.4` |Nodo A: Ejecuta la parte dinámica `extagram.php`. |
+| **S3** | **Extagram PHP B** | `172.26.0.3` |Nodo B: Ejecuta la parte dinámica `extagram.php`. |
+| **S4** | **Upload PHP** | `172.26.0.5` |Gestiona subidas mediante `upload.php` hacia el directorio de imágenes. |
+| **S5** | **Images Server** | `172.27.0.2` |Servidor Nginx dedicado a servir el contenido de `/uploads`. |
+| **S6** | **Static Server** | `172.27.0.3` |Servidor Nginx para archivos fijos: `style.css` y `preview.svg`. |
+| **S7** | **Database** | `172.26.0.2` | MySQL. Almacena posts y sirve de respaldo para las imágenes. |
 
 
 
