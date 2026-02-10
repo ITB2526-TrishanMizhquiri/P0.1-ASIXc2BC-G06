@@ -1,4 +1,4 @@
-# Sprint 2 Review: Dockerització i Microserveis
+# Sprint 3 Review: Failover y Segmentación de Microservicios
 Data de la reunió: 27/01/2026
 Equip: Trishan Mizhquiri i Joel Muñoz
 
