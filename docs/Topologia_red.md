@@ -16,13 +16,6 @@ Se ha diseñado una topología en Cisco Packet Tracer que segrega la aplicación
 | **S7** | **Database** | `172.26.0.2` | MySQL. Almacena posts y sirve de respaldo para las imágenes. |
 
 
-
-<div align="center">
-  <img src="/img/Diagrama.png" width="650px">
-  <p><i>Topología de red</i></p>
-</div>
-
-
 ---
 
 ## 2. Flujo de Funcionamiento
@@ -34,6 +27,122 @@ Para que la aplicación funcione correctamente, los servidores interactúan de l
 4.**Visualización:** Las imágenes publicadas se muestran al usuario a través del **S5**.
 
 ---
+
+## 3. Redes docker (Fronted y Backend)
+
+##  Configuració de la Infraestructura (Docker Compose)
+
+S'ha implementat una arquitectura de microserveis segmentada en dues xarxes (**frontend** i **backend**) per garantir la seguretat i l'aïllament dels recursos sensibles.
+
+###  Segmentació de Xarxes
+| Servei | Contenidor | Xarxes | Funció |
+| :--- | :--- | :--- | :--- |
+| **S1** | `s1-lb` | `frontend`, `backend` | **Proxy Invers & Load Balancer**: Punt d'entrada (Port 90). |
+| **S2** | `s2-php` | `backend` | **App Node A**: Processament PHP de la web principal. |
+| **S3** | `s3-php` | `backend` | **App Node B**: Rèplica per a balanç de càrrega. |
+| **S4** | `s4-upload` | `backend` | **Upload Manager**: Gestió de pujades a `/uploads`. |
+| **S5** | `s5-storage` | `frontend` | **Image Server**: Serveix les fotos del volum compartit. |
+| **S6** | `s6-static` | `frontend` | **Static Content**: Serveix fitxers CSS i SVG. |
+| **S7** | `s7-mysql` | `backend` | **Database**: Base de dades MySQL aïllada de l'exterior. |
+
+---
+
+###  Gestió de Volums i Persistència
+S'han definit volums específics per garantir que les dades no es perdin en reiniciar els contenidors:
+* **`uploads-volume`**: Compartit entre **S4** (escriptura) i **S5** (només lectura) per gestionar les imatges dels usuaris.
+* **`mysql-data`**: Persistència de les dades de la base de dades **S7**.
+
+---
+
+###  Fitxer de Configuració: `docker-compose.yml`
+
+```yaml
+services:
+  # S1: NGINX Proxy Inverso + Balanceo
+  s1-lb:
+    build: ./s1-nginx
+    container_name: s1-lb
+    ports:
+      - "90:90"
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - s2-php
+      - s3-php
+      - s4-upload
+      - s5-storage
+      - s6-static
+      - s7-mysql
+
+  # S2 & S3: PHP-FPM Nodes (Balanceo)
+  s2-php:
+    build: ./s2-php
+    container_name: s2-php
+    volumes:
+      - ./s2-php:/var/www/html
+    networks:
+      - backend
+
+  s3-php:
+    build: ./s3-php
+    container_name: s3-php
+    volumes:
+      - ./s3-php:/var/www/html
+    networks:
+      - backend
+
+  # S4: Gestión de subidas
+  s4-upload:
+    build: ./s4-upload
+    container_name: s4-upload
+    volumes:
+      - ./s4-upload:/var/www/html
+      - uploads-volume:/var/www/html/uploads
+    networks:
+      - backend
+
+  # S5: Servidor de Imágenes
+  s5-storage:
+    build: ./s5-storage
+    container_name: s5-storage
+    volumes:
+      - uploads-volume:/usr/share/nginx/html/uploads:ro
+    networks:
+      - frontend
+
+  # S6: Servidor Estático (CSS/SVG)
+  s6-static:
+    build: ./s6-static
+    container_name: s6-static
+    networks:
+      - frontend
+
+  # S7: Base de Datos MySQL
+  s7-mysql:
+    image: mysql:8.0
+    container_name: s7-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass123
+      MYSQL_DATABASE: extagram_db
+      MYSQL_USER: extagram_admin
+      MYSQL_PASSWORD: pass123
+    networks:
+      - backend
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./s7-mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  uploads-volume:
+  mysql-data:
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
 
 
 
