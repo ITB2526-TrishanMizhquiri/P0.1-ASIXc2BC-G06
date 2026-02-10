@@ -11,7 +11,7 @@
 - [03. Guía de Mantenimiento del Sistema](docs/Administrador/03-guia-manteniment.md)
 
 ###  Actas de Sprint
-- [Acta Sprint Planning S2](docs/sprints/acta-sprint-sprint2_planning_acta.md)
+- [Acta Sprint Planning S2](docs/sprints/sprint2_planning_acta.md)
 - [Acta Sprint Retrospective S2](docs/acta-sprint-retrospective-s2.md)
 
 ---
