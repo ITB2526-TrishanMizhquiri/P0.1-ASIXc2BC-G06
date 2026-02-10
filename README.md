@@ -19,6 +19,9 @@
 - [Acta Sprint Planning S2](docs/sprints/sprint2/sprint2_planning_acta.md)
 - [Acta Sprint Retrospective S2](docs/sprints/sprint2/sprint2_review_acta.md)
 
+
+- [Acta Sprint Planning S3](docs/sprints/sprint3/sprint3_planning_acta.md)
+- [Acta Sprint Retrospective S3](docs/sprints/sprint3/sprint3_review_acta.md)
 ---
 
 ##  Código Fuente
