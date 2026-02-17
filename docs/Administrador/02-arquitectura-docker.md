@@ -36,102 +36,7 @@ Dins de `s1-nginx/nginx.conf`, es va definir la lògica de balanceig i segmentac
 
 **Codi de configuració aplicat:**
 
-```bash
-# UPSTREAM per a balanceig S2 i S3
-upstream php_backend {
-    server s2-php:9000;
-    server s3-php:9000;
-}
-
-server {
-    listen 90;
-    server_name localhost;
-    charset utf-8;
-
-    # === 1. RECURSOS ESTÀTICS CSS/SVG → S6 ===
-    location ~* \.(css|svg)$ {
-        proxy_pass http://s6-static;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
-
-    # === 2. IMATGES PUJADES /uploads/ → S5 ===
-    location /uploads/ {
-        proxy_pass http://s5-storage;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
-
-    # === 3. LOGIN.PHP → S2/S3 (balanceig) ===
-    location = /login.php {
-        fastcgi_pass php_backend;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME /var/www/html/login.php;
-        fastcgi_param REQUEST_METHOD $request_method;
-        fastcgi_param CONTENT_TYPE $content_type;
-        fastcgi_param CONTENT_LENGTH $content_length;
-    }
-
-    # === 4. LOGOUT.PHP → S2/S3 ===
-    location = /logout.php {
-        fastcgi_pass php_backend;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME /var/www/html/logout.php;
-        fastcgi_param REQUEST_METHOD $request_method;
-    }
-
-    # === 5. UPLOAD.PHP → S4 ===
-    location = /upload.php {
-        fastcgi_pass s4-upload:9000;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME /var/www/html/upload.php;
-        fastcgi_param REQUEST_METHOD $request_method;
-        fastcgi_param CONTENT_TYPE $content_type;
-        fastcgi_param CONTENT_LENGTH $content_length;
-    }
-
-    # === 6. EXTAGRAM.PHP → S2/S3 (balanceig) ===
-    location = /extagram.php {
-        fastcgi_pass php_backend;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME /var/www/html/extagram.php;
-        fastcgi_param REQUEST_METHOD $request_method;
-    }
-
-    # === 7. DELETE.PHP → S2/S3 (balanceig) ===
-    location = /delete.php {
-        fastcgi_pass php_backend;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME /var/www/html/delete.php;
-        fastcgi_param REQUEST_METHOD $request_method;
-    }
-
-    # === 8. ARREL (/) → REDIRIGIR A LOGIN ===
-    location = / {
-        return 302 /login.php;
-    }
-
-    # === 9. QUALSEVOL ALTRE .PHP → BALANCEIG ===
-    location ~ \.php$ {
-        fastcgi_pass php_backend;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME /var/www/html$fastcgi_script_name;
-        fastcgi_param REQUEST_METHOD $request_method;
-    }
-
-    # === 10. HEALTH CHECK ===
-    location /health {
-        return 200 'OK';
-        add_header Content-Type text/plain;
-    }
-
-    # === 11. LOGS ===
-    access_log /var/log/nginx/access.log;
-    error_log /var/log/nginx/error.log;
-}
-```
+[Enllaç al codi: nginx.conf](../extagram/s1-nginx-/nginx.conf)
 
 ### 2.3.3. Dockerització del Servei S1
 Es va crear el **Dockerfile** específic per a **S1** amb l'objectiu d'automatitzar el desplegament de la configuració i garantir que el proxy invers estigui llest per operar immediatament en aixecar el contenidor.
@@ -140,15 +45,8 @@ S'ha utilitzat la imatge `nginx:alpine` per la seva lleugeresa i seguretat, sobr
 
 **Contingut del Dockerfile (s1-nginx/Dockerfile):**
 
-```bash
-FROM nginx:alpine
+[Enllaç al codi: nginx.conf](../extagram/s1-nginx-/Dokerfile)
 
-# Copiar la configuració de proxy invers i balanceig
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Exposar el port 90 definit en el nginx.conf
-EXPOSE 90
-```
 ### 2.3.4. Automatització i Correcció del Proxy
 Es va implementar un script de correcció en Bash per assegurar la integritat del sistema. Aquest script automatitza tasques crítiques per garantir que el fitxer `nginx.conf` i el `Dockerfile` estiguin correctament vinculats i operatius.
 
