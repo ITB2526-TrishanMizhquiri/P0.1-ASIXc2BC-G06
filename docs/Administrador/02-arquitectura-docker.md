@@ -3,7 +3,7 @@
 ## 2.1. Disseny de l'Arquitectura de Microserveis
 L'aplicació s'ha dissenyat seguint un model de microserveis desacoblats. En aquesta fase (Sprint 2), hem evolucionat d'un stack simple a una infraestructura d'alta disponibilitat dividida en 7 serveis especialitzats (S1-S7) per garantir que cada component pugui escalar de forma independent.
 
-![Arquitectura de contenidors distribuïda](/img/arch_diagram_92j.png)
+![Arquitectura de contenidors distribuïda]()
 
 ## 2.2. Preparació de l'Entorn i Estructura de Directoris
 El primer pas va ser la creació de la jerarquia de treball. Es van separar els rols en 7 carpetes específiques per gestionar el context de cada contenidor.
