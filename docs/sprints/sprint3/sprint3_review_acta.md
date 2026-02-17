@@ -44,4 +44,4 @@ L'Extagram ha passat d'una app monolítica a un sistema professional de microser
 ## 5. Evidència de tancament (ProofHub)
 Afegeix aquí la captura final amb **totes** les tasques del projecte a la columna de **Done**. És la imatge que demostra l'èxit total del projecte.
 
-![Tasques Finalitzat](/img/proofhub/tasques_finalizats_sprint3.png)
+![Tasques Finalitzat](/img/proofhub/Tasques_finalitzat_sprint3.png)
