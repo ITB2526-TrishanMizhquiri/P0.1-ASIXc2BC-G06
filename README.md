@@ -38,9 +38,10 @@
 | **[S7 - Database](s7-mysql/)** | MySQL persistente | [`init.sql`](s7-mysql/init.sql) |
 
 ###  Orquestación
-- [`docker-compose.yml`](docker-compose.yml) - Definición completa de servicios y redes
-- [`fix-s1-nginx.sh`](fix-s1-nginx.sh) - Script de corrección automática
-- [`verificar-archivos.sh`](verificar-archivos.sh) - Script de verificación de estructura
+- [`docker-compose.yml`](/docker/docker-compose.yml) - Definición completa de servicios y redes
+
+### Scripts
+
 
 ---
 
