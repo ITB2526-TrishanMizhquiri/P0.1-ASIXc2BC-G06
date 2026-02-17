@@ -64,7 +64,7 @@ cd ~/extagram
 
 ##  Diagramas de Arquitectura
 - [Diagrama de Redes Docker](img/Diagrama.png)
-- [Flujo de Peticiones](img/flux-peticions.png)
+- [Flujo de Peticiones](img/flux_peticions.png)
 - [Topología de Microservicios](docs/Topologia_red.md)
 
 ---
