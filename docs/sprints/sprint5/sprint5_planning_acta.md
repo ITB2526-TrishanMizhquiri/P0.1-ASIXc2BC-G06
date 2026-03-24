@@ -15,7 +15,7 @@ Període:
 
 ### 1.1. Estat inicial de la planificació (ProofHub)
 
-![Captura ProofHub - Tasques inicials](/img/proofhub/tasques_inicials_sprint4.png)
+
 
 ## 2. Full de Ruta Detallat
 
